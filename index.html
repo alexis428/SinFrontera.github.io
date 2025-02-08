@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración de Ventas - Sin Fronteras</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <header class="bg-blue-600 p-4 text-white text-center">
+    <h1 class="text-2xl font-bold">Panel de Administración - Sin Fronteras</h1>
+  </header>
+
+  <main class="p-6">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Registro de Ventas -->
+      <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold mb-3">Registrar Venta</h2>
+        <form id="venta-form">
+          <label class="block mb-2">Fecha:
+            <input type="text" id="fecha" class="border border-gray-300 p-2 w-full rounded" required />
+          </label>
+          <label class="block mb-2">Cliente:
+            <input type="text" id="cliente" class="border border-gray-300 p-2 w-full rounded" required />
+          </label>
+          <label class="block mb-4">Bidones(litros):
+            <select id="number" class="border border-gray-300 p-2 w-full rounded">
+              <option value="Ninguno">Ninguno</option>
+              <option value="15 Litros">15 Litros</option>
+              <option value="20 Litros">20 Litros</option>
+            </select>
+          </label>
+          <label class="block mb-2">Bidones Vendidos:
+            <input type="number" id="cantidad" class="border border-gray-300 p-2 w-full rounded" required />
+          </label>
+          <label class="block mb-4">Metodo De Pago:
+            <select id="text" class="border border-gray-300 p-2 w-full rounded">
+              <option value="M.Pago">Mercado Pago</option>
+              <option value="Efectivo">Efectivo</option>
+            </select>
+          </label>
+          <label class="block mb-4">Pago Recibido:
+            <select id="pago" class="border border-gray-300 p-2 w-full rounded">
+              <option value="si">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </label>
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Registrar</button>
+        </form>
+      </div>
+
+      <!-- Lista de Clientes -->
+      <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold mb-3">Estado de Clientes</h2>
+        <ul id="clientes-list" class="list-disc pl-5 text-gray-700">
+          <!-- Aquí se agregarán los clientes -->
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
