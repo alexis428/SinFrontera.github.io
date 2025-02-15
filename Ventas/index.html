@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona de Ventas - Sin Fronteras</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-blue-600 p-4 text-white text-center">
+        <h1 class="text-2xl font-bold">Zona de Ventas - Sin Fronteras</h1>
+    </header>
+
+    <main class="p-6">
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Registrar Venta -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">Registrar Venta</h2>
+                <form id="venta-form" class="space-y-4">
+                    <input type="date" id="fecha" class="input-field" required>
+                    <input type="text" id="cliente" class="input-field" required placeholder="Nombre del Cliente">
+                    <select id="cantidad-bidones" class="input-field">
+                        <option value="15 Litros">15 Litros</option>
+                        <option value="20 Litros">20 Litros</option>
+                    </select>
+                    <input type="number" id="cantidad" class="input-field" required placeholder="Cantidad" min="1">
+                    <input type="number" id="precio-total" class="input-field" readonly placeholder="Precio Total">
+                    <select id="metodo-pago" class="input-field">
+                        <option value="Mercado Pago">Mercado Pago</option>
+                        <option value="Efectivo">Efectivo</option>
+                    </select>
+                    <select id="pago-recibido" class="input-field">
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                    <button type="submit" class="btn-primary">Registrar Venta</button>
+                </form>
+            </div>
+
+            <!-- Lista de Ventas -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">Lista de Ventas</h2>
+                <div class="mb-4">
+                    <input type="text" id="filtro-cliente" class="input-field" placeholder="Buscar por cliente">
+                    <select id="filtro-pago" class="input-field">
+                        <option value="">Todos</option>
+                        <option value="si">Pagado</option>
+                        <option value="no">Pendiente</option>
+                    </select>
+                    <button id="filtrar-ventas" class="btn-secondary">Filtrar</button>
+                </div>
+                <ul id="ventas-list" class="space-y-3"></ul>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">Estadísticas de Ventas</h2>
+                <canvas id="ventas-chart"></canvas>
+            </div>
+        </section>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

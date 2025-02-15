@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Ventas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+    <header class="bg-blue-600 text-white p-4 text-center rounded">
+        <h1 class="text-2xl font-bold">Dashboard de Ventas - Agua Sin Fronteras</h1>
+    </header>
+    
+    <main class="mt-6 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-4 rounded shadow text-center">
+            <h2 class="text-lg font-semibold">Total Ventas</h2>
+            <p id="total-ventas" class="text-2xl font-bold text-blue-600">0</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow text-center">
+            <h2 class="text-lg font-semibold">Total Bidones Vendidos</h2>
+            <p id="total-bidones" class="text-2xl font-bold text-green-600">0</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow text-center">
+            <h2 class="text-lg font-semibold">Ingresos Generados</h2>
+            <p id="ingresos" class="text-2xl font-bold text-yellow-600">$0</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow text-center">
+            <h2 class="text-lg font-semibold">Clientes con Pagos Pendientes</h2>
+            <p id="pendientes" class="text-2xl font-bold text-red-600">0</p>
+        </div>
+    </main>
+
+    <section class="mt-6 max-w-6xl mx-auto">
+        <canvas id="ventasChart"></canvas>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

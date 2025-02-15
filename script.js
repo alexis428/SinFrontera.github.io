@@ -1,19 +1,59 @@
-document.getElementById('venta-form').addEventListener('submit', function(event) {
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const ventasList = document.getElementById("ventas-list");
+    const ventaForm = document.getElementById("venta-form");
+    const ventasChartCtx = document.getElementById("ventas-chart").getContext("2d");
 
-  const fecha = document.getElementById('fecha').value;
-  const cliente = document.getElementById('cliente').value;
-  const number = document.getElementById('number').value;
-  const cantidad = document.getElementById('cantidad').value;
-  const text = document.getElementById('text').value;
-  const pago = document.getElementById('pago').value;
+    let ventasData = [];
+    let chart;
 
-  const clienteEntry = document.createElement('li');
-  clienteEntry.textContent = `Fecha: ${fecha}, Cliente: ${cliente}, Bidones: ${number}, Cantidad: ${cantidad}, Metodo: ${text} Pago: ${pago === 'si' ? 'Recibido' : 'Pendiente'}`;
-  clienteEntry.classList.add(pago === 'si' ? 'text-green-600' : 'text-red-600');
+    function actualizarGrafico() {
+        if (chart) {
+            chart.destroy();
+        }
+        chart = new Chart(ventasChartCtx, {
+            type: "bar",
+            data: {
+                labels: ventasData.map(v => v.cliente),
+                datasets: [{
+                    label: "Cantidad de Bidones",
+                    data: ventasData.map(v => v.cantidad),
+                    backgroundColor: "rgba(54, 162, 235, 0.5)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
 
-  document.getElementById('clientes-list').appendChild(clienteEntry);
+    function agregarVenta(cliente, cantidad, pago) {
+        const li = document.createElement("li");
+        li.textContent = `${cliente} - ${pago === "si" ? "Pagado" : "Debe"}`;
+        li.className = pago === "si" ? "text-green-600" : "text-red-600";
+        ventasList.appendChild(li);
 
-  // Limpiar formulario
-  document.getElementById('venta-form').reset();
+        ventasData.push({ cliente, cantidad, pago });
+        actualizarGrafico();
+    }
+
+    ventaForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const cliente = document.getElementById("cliente").value.trim();
+        const cantidad = parseInt(document.getElementById("cantidad").value, 10);
+        const pago = document.getElementById("pago-recibido").value;
+
+        if (cliente && cantidad > 0) {
+            agregarVenta(cliente, cantidad, pago);
+            ventaForm.reset();
+        } else {
+            alert("Ingrese datos válidos.");
+        }
+    });
 });

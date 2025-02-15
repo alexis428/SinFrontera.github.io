@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,59 +7,92 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-100 min-h-screen">
-  <header class="bg-blue-600 p-4 text-white text-center">
-    <h1 class="text-2xl font-bold">Panel de Administración - Sin Fronteras</h1>
-  </header>
+<body class="bg-gray-100 min-h-screen flex">
 
-  <main class="p-6">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-blue-700 text-white p-6">
+    <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>
+    <nav>
+      <ul class="space-y-4">
+        <li><a href="Dashboard/index.html" class="block py-2 px-4 rounded hover:bg-blue-800">🏠 Dashboard</a></li>
+        <li><a href="Ventas/index.html" class="block py-2 px-4 rounded hover:bg-blue-800">📊 Ventas</a></li>
+        <li><a href="Clientes/index.html" class="block py-2 px-4 rounded hover:bg-blue-800">👥 Clientes</a></li>
+        <li><a href="Configuracion/index.html" class="block py-2 px-4 rounded hover:bg-blue-800">⚙ Configuración</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Contenido Principal -->
+  <main class="flex-1 p-8">
+    <header class="bg-white p-4 rounded shadow-md mb-6 text-center">
+      <h1 class="text-3xl font-bold text-blue-700">Panel de Administración</h1>
+    </header>
+
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Registro de Ventas -->
-      <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-xl font-semibold mb-3">Registrar Venta</h2>
-        <form id="venta-form">
-          <label class="block mb-2">Fecha:
-            <input type="text" id="fecha" class="border border-gray-300 p-2 w-full rounded" required />
-          </label>
-          <label class="block mb-2">Cliente:
-            <input type="text" id="cliente" class="border border-gray-300 p-2 w-full rounded" required />
-          </label>
-          <label class="block mb-4">Bidones(litros):
-            <select id="number" class="border border-gray-300 p-2 w-full rounded">
-              <option value="Ninguno">Ninguno</option>
-              <option value="15 Litros">15 Litros</option>
-              <option value="20 Litros">20 Litros</option>
-            </select>
-          </label>
-          <label class="block mb-2">Bidones Vendidos:
-            <input type="number" id="cantidad" class="border border-gray-300 p-2 w-full rounded" required />
-          </label>
-          <label class="block mb-4">Metodo De Pago:
-            <select id="text" class="border border-gray-300 p-2 w-full rounded">
-              <option value="M.Pago">Mercado Pago</option>
-              <option value="Efectivo">Efectivo</option>
-            </select>
-          </label>
-          <label class="block mb-4">Pago Recibido:
-            <select id="pago" class="border border-gray-300 p-2 w-full rounded">
-              <option value="si">Sí</option>
-              <option value="no">No</option>
-            </select>
-          </label>
-          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Registrar</button>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Registrar Venta</h2>
+        <form id="venta-form" class="space-y-4">
+          <input type="date" id="fecha" class="input-field" required placeholder="Fecha">
+          <input type="text" id="cliente" class="input-field" required placeholder="Nombre del Cliente">
+          <select id="number" class="input-field">
+            <option value="Ninguno">Ninguno</option>
+            <option value="15 Litros">15 Litros</option>
+            <option value="20 Litros">20 Litros</option>
+          </select>
+          <input type="number" id="cantidad" class="input-field" required placeholder="Cantidad">
+          <select id="metodo" class="input-field">
+            <option value="M.Pago">Mercado Pago</option>
+            <option value="Efectivo">Efectivo</option>
+          </select>
+          <select id="pago" class="input-field">
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+          </select>
+          <button type="submit" class="btn-primary">Registrar Venta</button>
         </form>
       </div>
 
       <!-- Lista de Clientes -->
-      <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-xl font-semibold mb-3">Estado de Clientes</h2>
-        <ul id="clientes-list" class="list-disc pl-5 text-gray-700">
-          <!-- Aquí se agregarán los clientes -->
-        </ul>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Lista de Clientes</h2>
+        <ul id="clientes-list" class="space-y-3"></ul>
       </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const clientesList = document.getElementById("clientes-list");
+        const ventaForm = document.getElementById("venta-form");
+
+        function agregarCliente(cliente) {
+            const li = document.createElement("li");
+            li.textContent = cliente;
+            li.className = "p-2 bg-gray-100 rounded-lg flex justify-between items-center shadow-sm";
+            
+            const btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "❌";
+            btnEliminar.className = "text-red-500 hover:text-red-700 transition";
+            btnEliminar.onclick = () => {
+                clientesList.removeChild(li);
+            };
+
+            li.appendChild(btnEliminar);
+            clientesList.appendChild(li);
+        }
+
+        ventaForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const cliente = document.getElementById("cliente").value.trim();
+            if (cliente) {
+                agregarCliente(cliente);
+                ventaForm.reset();
+            } else {
+                alert("Por favor, ingrese el nombre del cliente.");
+            }
+        });
+    });
+  </script>
 </body>
 </html>

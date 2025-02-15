@@ -1,0 +1,68 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    border-color: #2563eb;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    background-color: #10b981;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    background-color: #059669;
+}
+
+.venta-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #2563eb;
+}
+
+.venta-item.pendiente {
+    border-left-color: #f43f5e;
+}
+
+.text-red-500 {
+    cursor: pointer;
+}
+
+.text-red-500:hover {
+    color: #dc2626;
+}
